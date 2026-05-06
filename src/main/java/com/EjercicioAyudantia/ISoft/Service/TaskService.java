@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,4 +20,14 @@ public class TaskService {
                 .filter(task -> limitDate == null || task.getLimitDate().equals(limitDate))
                 .collect(Collectors.toList());
     }
+
+
+    private final AtomicLong idCounter = new AtomicLong(1);
+    public Task createTask(Task task) {
+        task.setId(idCounter.getAndIncrement());
+        task.setCompleted(false);
+        tasks.add(task);
+        return task;
+    }
+
 }
