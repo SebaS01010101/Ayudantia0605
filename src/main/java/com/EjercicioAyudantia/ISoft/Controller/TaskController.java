@@ -28,12 +28,6 @@ public class TaskController {
         return new ResponseEntity<>(createdTask, HttpStatus.CREATED);
     }
 
-    private final TaskService taskService;
-
-    public TaskController(TaskService taskService) {
-        this.taskService = taskService;
-    }
-
     @GetMapping
     public ResponseEntity<List<Task>> getTAsks(
             @RequestParam(required = false) String priority,
